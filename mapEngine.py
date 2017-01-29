@@ -79,7 +79,7 @@ def calcBounds(point, zoom, width, height):
 
     scale = math.pow(2.0, float(zoom))
 
-    centerPx = fromLatLongToPoint({ 'lat': point['lat'], 'lng': point['lng']})
+    centerPx = fromLatLongToPoint(point)
 
     southWestPoint = { 'x': centerPx['x'] - (width/2)/scale, 'y': centerPx['y'] + (height/2)/scale }
     southWestLatLng = fromPointToLatLong(southWestPoint)
@@ -89,11 +89,13 @@ def calcBounds(point, zoom, width, height):
 
     return northEastLatLng, southWestLatLng
 
+
 def getLatLngtoPixel(latLng, zoom):
     siny = math.sin(latLng['lat'] * math.pi / 180)
     pixelX = ((latLng['lng'] + 180) / 360) * 256 * math.pow(2, zoom)
     pixelY = (0.5 - math.log((1 + siny) / (1 - siny)) / (4 * math.pi)) * 256 * math.pow(2, zoom)
     return {'x': pixelX, 'y': pixelY }
+
 
 def getCentre(bounds):
     centre = { 'lat': 0, 'lng': 0}

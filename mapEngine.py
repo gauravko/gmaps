@@ -8,6 +8,14 @@ MIN_LAT = -85.05112878
 MAX_LAT = 85.05112878
 MIN_LNG = -180
 MAX_LNG = 180
+ASPECT_RATIO = float(4.0/3.0)
+
+def maintainAspectRatio(width, height):
+    expectedHeight = width/ASPECT_RATIO
+    if expectedHeight > height:
+        return ( int(ASPECT_RATIO*height, height))
+    else:
+        return ( width, int(expectedHeight))
 
 def latRad(latitude):
     sin = math.sin( latitude * math.pi / 180 )
